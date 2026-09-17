@@ -1,0 +1,137 @@
+{
+  "model": "opus",
+  "effortLevel": "xhigh",
+  "theme": "dark-ansi",
+  "tui": "fullscreen",
+  "terminalTitle": "dynamic",
+  "cleanupPeriodDays": 45,
+  "statusLine": {
+    "type": "command",
+    "command": "bash $HOME/.claude/statusline.sh"
+  },
+  "permissions": {
+    "defaultMode": "acceptEdits",
+    "allow": [
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git show:*)",
+      "Bash(git branch:*)",
+      "Bash(git rev-parse:*)",
+      "Bash(git ls-files:*)",
+      "Bash(git check-ignore:*)",
+      "Bash(git stash list:*)",
+      "Bash(git merge-base:*)",
+      "Bash(git remote -v)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(cargo test:*)",
+      "Bash(cargo check:*)",
+      "Bash(cargo fmt:*)",
+      "Bash(cargo clippy:*)",
+      "Bash(cargo build:*)",
+      "Bash(cargo info:*)",
+      "Bash(go test:*)",
+      "Bash(go build:*)",
+      "Bash(go vet:*)",
+      "Bash(go run:*)",
+      "Bash(gofmt:*)",
+      "Bash(python3:*)",
+      "Bash(uv run:*)",
+      "Bash(uv pip list:*)",
+      "Bash(uv sync:*)",
+      "Bash(npm run:*)",
+      "Bash(npm test:*)",
+      "Bash(npm ls:*)",
+      "Bash(node:*)",
+      "Bash(rg:*)",
+      "Bash(fd:*)",
+      "Bash(grep:*)",
+      "Bash(find:*)",
+      "Bash(ls:*)",
+      "Bash(eza:*)",
+      "Bash(cat:*)",
+      "Bash(bat:*)",
+      "Bash(head:*)",
+      "Bash(tail:*)",
+      "Bash(wc:*)",
+      "Bash(sort:*)",
+      "Bash(uniq:*)",
+      "Bash(cut:*)",
+      "Bash(tr:*)",
+      "Bash(diff:*)",
+      "Bash(jq:*)",
+      "Bash(file:*)",
+      "Bash(stat:*)",
+      "Bash(du:*)",
+      "Bash(tree:*)",
+      "Bash(which:*)",
+      "Bash(echo:*)",
+      "Bash(printf:*)",
+      "Bash(mkdir:*)",
+      "Bash(sed -n:*)",
+      "Bash(awk:*)",
+      "Bash(chroma:*)"
+    ],
+    "ask": [
+      "Bash(git push:*)",
+      "Bash(git reset --hard:*)",
+      "Bash(git clean:*)",
+      "Bash(rm:*)",
+      "Bash(gh pr create:*)",
+      "Bash(gh release:*)",
+      "Bash(npm publish:*)",
+      "Bash(cargo publish:*)",
+      "Bash(curl:*)",
+      "Bash(wget:*)"
+    ],
+    "deny": [
+      "Bash(git push --force:*)",
+      "Bash(git push -f:*)",
+      "Read(//home/mamut/.claude/.credentials.json)",
+      "Read(//home/mamut/.claude.json)",
+      "Read(//home/mamut/.ssh/**)",
+      "Read(//home/mamut/.gnupg/**)",
+      "Read(//**/.env)",
+      "Read(//**/.env.*)",
+      "Read(//**/id_rsa)",
+      "Read(//**/id_ed25519)"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit|NotebookEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.claude/hooks/format-edited.sh",
+            "timeout": 15
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.claude/hooks/session-context.sh",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.claude/hooks/finish-check.sh",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
+}
