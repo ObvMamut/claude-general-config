@@ -10,7 +10,7 @@
     "command": "bash $HOME/.claude/statusline.sh"
   },
   "permissions": {
-    "defaultMode": "acceptEdits",
+    "defaultMode": "bypassPermissions",
     "allow": [
       "Bash(git status:*)",
       "Bash(git diff:*)",
